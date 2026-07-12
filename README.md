@@ -41,6 +41,25 @@ The enterprise network follows the Cisco hierarchical design model.
 - VoIP Phones
 - End Devices
 - Servers
+```
+
+---
+  
+## 🌍 Network Flow
+
+
+Internet
+      │
+Edge Router
+      │
+ASA Firewall
+      │
+Distribution Switch
+      │
+Access Switches
+      │
+PCs | IP Phones | AP | Servers
+```
 
 ---
 
@@ -76,7 +95,7 @@ The enterprise network follows the Cisco hierarchical design model.
 - ✔ EtherChannel (LACP)
 - ✔ DHCP Configuration
 - ✔ HSRP
-- ✔STATIC-DEFAULT Routing
+- ✔ DEFAULT Routing
 - ✔ Cisco ASA Firewall
 - ✔ Static & Dynamic NAT
 - ✔ Access Control Lists (ACL)
