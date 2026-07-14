@@ -1,0 +1,233 @@
+FINANCE-ASW#sh run
+Building configuration...
+
+Current configuration : 4461 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname FINANCE-ASW
+!
+enable password 7 0812797C20
+!
+!
+!
+ip ssh version 2
+no ip domain-lookup
+ip domain-name CISCO.COM
+!
+username CISCO privilege 1 password 7 0812797C20
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ description "sales vlan 10"
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/2
+ description "sales vlan 10"
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/3
+ description "ip phone vlan voice 20"
+ switchport mode access
+ switchport voice vlan 20
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/4
+ description "sales vlan 10"
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/5
+ description "wireless lan controller vlan 30"
+ switchport access vlan 30
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/7
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/8
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/9
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/10
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/11
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/12
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/13
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/14
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/15
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/16
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/17
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/18
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/19
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/20
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/21
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/22
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/23
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface FastEthernet0/24
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ shutdown
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+banner motd ^Cthis is SALES Access switch^C
+!
+!
+!
+access-list 1 permit 192.168.0.0 0.0.0.255
+access-list 1 deny any
+line con 0
+ password 7 0812797C20
+ logging synchronous
+ login
+ exec-timeout 3 0
+!
+line vty 0 4
+ exec-timeout 3 0
+ password 7 0812797C20
+ logging synchronous
+ login
+ transport input ssh
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
+
+FINANCE-ASW#

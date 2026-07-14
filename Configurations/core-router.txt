@@ -1,0 +1,107 @@
+
+ISP-ROUTER#sh run
+Building configuration...
+
+Current configuration : 1150 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname ISP-ROUTER
+!
+login block-for 30 attempts 3 within 10
+!
+!
+enable password 7 0812797C20
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username CISCO password 7 0812797C20
+!
+!
+license udi pid CISCO2911/K9 sn FTX152464TL-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+ip domain-name CISCO.COM
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 115.12.3.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 125.112.3.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 115.12.3.2 
+ip route 0.0.0.0 0.0.0.0 125.112.3.2 
+!
+ip flow-export version 9
+!
+!
+ip access-list extended sl_def_acl
+ deny tcp any any eq telnet
+ deny tcp any any eq www
+ deny tcp any any eq 22
+ permit tcp any any eq 22
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 3 0
+ password 7 0832595C00
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+
+ISP-ROUTER# 

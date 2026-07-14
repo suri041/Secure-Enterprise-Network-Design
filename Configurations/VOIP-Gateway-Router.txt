@@ -1,0 +1,156 @@
+VOIP-Gateway#sh run  
+Building configuration...
+
+Current configuration : 1626 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname VOIP-Gateway
+!
+!
+!
+enable password 7 0812797C20
+!
+!
+!
+ip dhcp pool VOIP_GATEWAY
+ network 172.31.0.0 255.255.0.0
+ default-router 172.31.0.1
+ option 150 ip 172.31.0.1
+ dns-server 10.10.10.5
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2811/K9 sn FTX10174A0F-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.20
+ description $ this is voip Routing router $
+ encapsulation dot1Q 20
+ ip address 172.31.0.1 255.255.0.0
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+telephony-service
+ max-ephones 10
+ max-dn 10
+ ip source-address 172.31.0.1 port 2000
+ auto assign 1 to 10
+!
+ephone-dn 1
+ number 101
+!
+ephone-dn 2
+ number 102
+!
+ephone-dn 3
+ number 103
+!
+ephone-dn 4
+ number 104
+!
+ephone-dn 5
+ number 105
+!
+ephone-dn 6
+ number 106
+!
+ephone-dn 7
+ number 107
+!
+ephone-dn 8
+ number 108
+!
+ephone-dn 9
+ number 109
+!
+ephone-dn 10
+ number 10
+!
+ephone 1
+ device-security-mode none
+ mac-address 00E0.B026.DE6D
+ type 7960
+ button 1:2
+!
+ephone 2
+ device-security-mode none
+ mac-address 0009.7CBC.82E4
+ type 7960
+ button 1:3
+!
+ephone 3
+ device-security-mode none
+ mac-address 0060.3E63.26B7
+ type 7960
+ button 1:1
+!
+ephone 4
+ device-security-mode none
+ mac-address 0004.9AD1.D812
+ type 7960
+ button 1:4
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+
+VOIP-Gateway#

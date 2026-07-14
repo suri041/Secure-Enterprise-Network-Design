@@ -1,0 +1,130 @@
+FLW#SH RUN
+ASA Version 9.6(1)
+!
+hostname FLW
+domain-name wr
+enable password TNa5Y0dwnmnOJggF encrypted
+names
+!
+interface GigabitEthernet1/1
+ description ***** int outside1 *****
+ nameif outside1
+ security-level 0
+ ip address 115.12.3.2 255.255.255.252
+!
+interface GigabitEthernet1/2
+ description ***** int  inside1 *****
+ nameif inside1
+ security-level 100
+ ip address 192.168.2.2 255.255.255.252
+!
+interface GigabitEthernet1/3
+ description ***** int inside2 ********
+ nameif inside2
+ security-level 100
+ ip address 192.168.2.6 255.255.255.252
+!
+interface GigabitEthernet1/4
+ nameif outside2
+ security-level 0
+ ip address 125.112.3.2 255.255.255.252
+!
+interface GigabitEthernet1/5
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/6
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/7
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/8
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+interface Management1/1
+ management-only
+ no nameif
+ no security-level
+ no ip address
+ shutdown
+!
+object network inside1-outside1
+ subnet 172.16.0.0 255.255.0.0
+ nat (inside1,outside1) dynamic interface
+object network inside1-outside2
+ subnet 172.16.0.0 255.255.0.0
+ nat (inside1,outside2) dynamic interface
+object network inside2-outside1
+ subnet 172.16.0.0 255.255.0.0
+ nat (inside2,outside1) dynamic interface
+object network inside2-outside2
+ subnet 172.16.0.0 255.255.0.0
+ nat (inside2,outside2) dynamic interface
+object network insideWLan1-outsideWLan2
+ subnet 10.20.0.0 255.255.0.0
+ nat (inside1,outside2) dynamic interface
+object network insideWlan1-outsideWlan1
+ subnet 10.20.0.0 255.255.0.0
+ nat (inside1,outside1) dynamic interface
+object network insideWlan2-ousideWlan2
+object network insideWlan2-outsideWLan1
+ subnet 10.20.0.0 255.255.0.0
+ nat (inside2,outside1) dynamic interface
+object network insideWlan2-outsideWlan2
+ subnet 10.20.0.0 255.255.0.0
+ nat (inside2,outside2) dynamic interface
+!
+route outside2 0.0.0.0 0.0.0.0 125.112.3.1 10
+route outside1 0.0.0.0 0.0.0.0 115.12.3.1 1
+!
+access-list check extended permit icmp any any
+access-list check extended permit tcp any any
+access-list check extended permit udp any any
+access-list check extended deny ip any any
+!
+!
+access-group check in interface outside1
+access-group check in interface outside2
+!
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp 
+  inspect tftp 
+!
+service-policy global_policy global
+!
+telnet timeout 5
+ssh timeout 5
+!
+!
+!
+!
+router ospf 1
+ router-id 1.1.3.3
+ log-adjacency-changes
+ network 192.168.2.0 255.255.255.252 area 0
+ network 192.168.2.4 255.255.255.252 area 0
+ network 115.12.3.0 255.255.255.252 area 0
+ network 125.112.3.0 255.255.255.252 area 0
+!
+FLW# 
